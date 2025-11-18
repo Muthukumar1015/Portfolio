@@ -1,75 +1,145 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
 import { FaReact, FaJsSquare, FaGitAlt, FaHtml5 } from 'react-icons/fa';
 import { SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 import { GiArtificialIntelligence } from 'react-icons/gi';
 import { IoPhonePortraitOutline, IoHomeOutline, IoPersonOutline, IoMailOutline, IoFolderOutline, IoGridOutline } from 'react-icons/io5';
 import Image from 'next/image';
+import emailjs from '@emailjs/browser';
 
 export default function Home() {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800 pb-20 md:pb-0">
-      {/* Vertical Navigation - Desktop */}
-      <nav className="hidden md:flex fixed left-8 top-1/2 -translate-y-1/2 z-50 flex-col gap-4">
-        <a href="#home" className="group relative w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-blue-600 hover:text-white transition shadow-md" title="Home">
-          <IoHomeOutline className="text-xl" />
-          <span className="absolute left-full ml-4 px-3 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Home</span>
-        </a>
-        <a href="#about" className="group relative w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-blue-600 hover:text-white transition shadow-md" title="About">
-          <IoPersonOutline className="text-xl" />
-          <span className="absolute left-full ml-4 px-3 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">About</span>
-        </a>
-        <a href="#skills" className="group relative w-12 h-12 flex items-center justify-center rounded-full bg-blue-600 text-white border border-blue-600 hover:bg-blue-700 transition shadow-md" title="Skills">
-          <IoGridOutline className="text-xl" />
-          <span className="absolute left-full ml-4 px-3 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Skills</span>
-        </a>
-        <a href="#projects" className="group relative w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-blue-600 hover:text-white transition shadow-md" title="Projects">
-          <IoFolderOutline className="text-xl" />
-          <span className="absolute left-full ml-4 px-3 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Projects</span>
-        </a>
-        <a href="#contact" className="group relative w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-blue-600 hover:text-white transition shadow-md" title="Contact">
-          <IoMailOutline className="text-xl" />
-          <span className="absolute left-full ml-4 px-3 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Contact</span>
-        </a>
-      </nav>
+  const [mainFormStatus, setMainFormStatus] = useState('');
+  const [activeSection, setActiveSection] = useState('home');
+  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
+  const aboutRef = useRef<HTMLElement>(null);
+  const skillsRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
 
-      {/* Mobile Bottom Navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-lg border-t border-zinc-200 dark:border-zinc-700 shadow-2xl">
-        <div className="flex justify-around items-center h-16 px-4">
-          <a href="#home" className="flex flex-col items-center justify-center gap-1 text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition" title="Home">
-            <IoHomeOutline className="text-2xl" />
-            <span className="text-xs font-medium">Home</span>
-          </a>
-          <a href="#about" className="flex flex-col items-center justify-center gap-1 text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition" title="About">
-            <IoPersonOutline className="text-2xl" />
-            <span className="text-xs font-medium">About</span>
-          </a>
-          <a href="#skills" className="flex flex-col items-center justify-center gap-1 text-blue-600 dark:text-blue-400 transition" title="Skills">
-            <IoGridOutline className="text-2xl" />
-            <span className="text-xs font-medium">Skills</span>
-          </a>
-          <a href="#projects" className="flex flex-col items-center justify-center gap-1 text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition" title="Projects">
-            <IoFolderOutline className="text-2xl" />
-            <span className="text-xs font-medium">Projects</span>
-          </a>
-          <a href="#contact" className="flex flex-col items-center justify-center gap-1 text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition" title="Contact">
-            <IoMailOutline className="text-2xl" />
-            <span className="text-xs font-medium">Contact</span>
-          </a>
-        </div>
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Call once on mount
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Intersection Observer for all sections
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            setVisibleSections((prev) => ({ ...prev, [id]: true }));
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const refs = [aboutRef, skillsRef, projectsRef, contactRef];
+    refs.forEach((ref) => {
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleMainFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    if (!form.checkValidity()) {
+      form.classList.add('was-validated');
+      return;
+    }
+
+    setMainFormStatus('Please wait...');
+
+    const serviceId = 'service_6sucd6k';
+    const notificationTemplateId = 'template_dhivsqh';
+    const autoReplyTemplateId = 'template_ca6cu7o';
+    const publicKey = 'jcHXGbrupWT5gjOgu';
+
+    try {
+      // Send notification to you
+      await emailjs.sendForm(serviceId, notificationTemplateId, form, publicKey);
+
+      // Send auto-reply to user
+      await emailjs.sendForm(serviceId, autoReplyTemplateId, form, publicKey);
+
+      setMainFormStatus('Message sent successfully!');
+      form.reset();
+      form.classList.remove('was-validated');
+      setTimeout(() => {
+        setMainFormStatus('');
+      }, 3000);
+    } catch (error) {
+      setMainFormStatus('Something went wrong!');
+    }
+  };
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800 pl-14 md:pl-0">
+      {/* Vertical Navigation - All Screens */}
+      <nav className="fixed left-2 md:left-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 md:gap-4">
+        <a href="#home" className={`group relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border transition shadow-md ${activeSection === 'home' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:bg-blue-600 hover:text-white'}`} title="Home">
+          <IoHomeOutline className="text-lg md:text-xl" />
+          <span className="absolute left-full ml-4 px-3 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none hidden md:block">Home</span>
+        </a>
+        <a href="#about" className={`group relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border transition shadow-md ${activeSection === 'about' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:bg-blue-600 hover:text-white'}`} title="About">
+          <IoPersonOutline className="text-lg md:text-xl" />
+          <span className="absolute left-full ml-4 px-3 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none hidden md:block">About</span>
+        </a>
+        <a href="#skills" className={`group relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border transition shadow-md ${activeSection === 'skills' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:bg-blue-600 hover:text-white'}`} title="Skills">
+          <IoGridOutline className="text-lg md:text-xl" />
+          <span className="absolute left-full ml-4 px-3 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none hidden md:block">Skills</span>
+        </a>
+        <a href="#projects" className={`group relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border transition shadow-md ${activeSection === 'projects' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:bg-blue-600 hover:text-white'}`} title="Projects">
+          <IoFolderOutline className="text-lg md:text-xl" />
+          <span className="absolute left-full ml-4 px-3 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none hidden md:block">Projects</span>
+        </a>
+        <a href="#contact" className={`group relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border transition shadow-md ${activeSection === 'contact' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:bg-blue-600 hover:text-white'}`} title="Contact">
+          <IoMailOutline className="text-lg md:text-xl" />
+          <span className="absolute left-full ml-4 px-3 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none hidden md:block">Contact</span>
+        </a>
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative pt-32 pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section id="home" className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* Background Image with dark overlay */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url(/home.jpg)' }}
+        />
+        <div className="absolute inset-0 bg-black/70" />
         {/* Animated background blobs */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000" />
 
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="max-w-6xl mx-auto relative z-10 w-full">
           <div className="text-center">
             {/* Main heading with gradient */}
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
-              <span className="text-zinc-900 dark:text-white">Hi, I'm </span>
+              <span className="text-white">Hi, I'm </span>
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent animate-gradient">
                 Muthukumar
               </span>
@@ -80,7 +150,7 @@ export default function Home() {
               {['Frontend Developer', 'B.Tech Mechanical', 'AI Enthusiast', 'Tester'].map((role) => (
                 <span
                   key={role}
-                  className="px-4 py-2 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-700 dark:text-zinc-300 font-medium hover:border-blue-500 dark:hover:border-blue-400 hover:scale-105 transition shadow-sm"
+                  className="px-4 py-2 bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-lg text-white font-medium hover:border-blue-400 hover:scale-105 transition shadow-sm"
                 >
                   {role}
                 </span>
@@ -88,8 +158,8 @@ export default function Home() {
             </div>
 
             {/* Description with highlighted keywords */}
-            <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Specializing in <span className="font-semibold text-blue-600 dark:text-blue-400">React Native</span>, <span className="font-semibold text-blue-600 dark:text-blue-400">Next.js</span>, and <span className="font-semibold text-purple-600 dark:text-purple-400">AI integrations</span>.
+            <p className="text-lg sm:text-xl text-zinc-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Specializing in <span className="font-semibold text-blue-400">React Native</span>, <span className="font-semibold text-blue-400">Next.js</span>, and <span className="font-semibold text-purple-400">AI integrations</span>.
               I turn ideas into reality with expert prompting skills and modern web technologies.
             </p>
 
@@ -106,7 +176,7 @@ export default function Home() {
               </a>
               <a
                 href="#contact"
-                className="group px-8 py-4 border-2 border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-white rounded-xl hover:border-blue-500 dark:hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-zinc-800 transition font-semibold shadow-md hover:shadow-lg transform hover:scale-105 flex items-center justify-center gap-2"
+                className="group px-8 py-4 border-2 border-white/30 text-white rounded-xl hover:border-blue-400 hover:bg-white/10 transition font-semibold shadow-md hover:shadow-lg transform hover:scale-105 flex items-center justify-center gap-2"
               >
                 <span>Get In Touch</span>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,7 +189,13 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <section
+        ref={aboutRef}
+        id="about"
+        className={`py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-all duration-1000 ${
+          visibleSections['about'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-white to-yellow-50/50 dark:from-zinc-800 dark:via-zinc-900 dark:to-zinc-800 opacity-60" />
         <div className="absolute inset-0" style={{
@@ -202,7 +278,13 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <section
+        ref={skillsRef}
+        id="skills"
+        className={`py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-all duration-1000 ${
+          visibleSections['skills'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-zinc-800 dark:via-zinc-900 dark:to-zinc-800 opacity-50" />
         <div className="absolute inset-0" style={{
@@ -252,7 +334,13 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <section
+        ref={projectsRef}
+        id="projects"
+        className={`py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-all duration-1000 ${
+          visibleSections['projects'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-zinc-800 dark:via-zinc-900 dark:to-zinc-800 opacity-70" />
         <div className="absolute inset-0" style={{
@@ -325,7 +413,13 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <section
+        ref={contactRef}
+        id="contact"
+        className={`py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-all duration-1000 ${
+          visibleSections['contact'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
         {/* Background gradient blobs */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl" />
@@ -343,70 +437,94 @@ export default function Home() {
             <p className="text-zinc-600 dark:text-zinc-400">Let's create something amazing together!</p>
           </div>
 
-          <div className="bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 rounded-2xl p-8 border-2 border-zinc-200 dark:border-zinc-700 shadow-xl">
-            <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-8 text-center">
-              I'm always open to new opportunities and collaborations. Feel free to reach out!
-            </p>
-            <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6">
-              {/* Replace YOUR_WEB3FORMS_ACCESS_KEY with your actual key from https://web3forms.com */}
-              <input type="hidden" name="access_key" value="c7622ea5-d78a-4bb1-8066-e7a7e88ff507" />
-              <input type="hidden" name="subject" value="New Message from Portfolio Website" />
-              <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+          <div className="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700 shadow-xl">
+            {/* Form Header */}
+            <div className="bg-gradient-to-r from-purple-600 to-purple-700 px-8 py-10 text-center">
+              <h3 className="text-2xl font-bold text-white mb-2">How can we help?</h3>
+              <p className="text-purple-100">We usually respond in a few hours</p>
+            </div>
+
+            {/* Form Body */}
+            <div className="p-8">
+              <form onSubmit={handleMainFormSubmit} className="needs-validation space-y-5" noValidate>
 
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-zinc-900 dark:text-white mb-2">
-                  Name
+                <label htmlFor="name" className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 mb-2 uppercase tracking-wide">
+                  Your Name
                 </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Your name"
+                  className="w-full px-4 py-3.5 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:focus:ring-purple-600 transition"
+                  placeholder="e.g. Muthukumar"
                 />
+                <div className="empty-feedback invalid-feedback text-red-400 text-sm mt-1">
+                  Please provide your full name.
+                </div>
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-zinc-900 dark:text-white mb-2">
-                  Email
+                <label htmlFor="email" className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 mb-2 uppercase tracking-wide">
+                  Your Email
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="your@email.com"
+                  className="w-full px-4 py-3.5 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:focus:ring-purple-600 transition"
+                  placeholder="e.g. you@example.com"
                 />
+                <div className="empty-feedback text-red-400 text-sm mt-1">
+                  Please provide your email address.
+                </div>
+                <div className="invalid-feedback text-red-400 text-sm mt-1">
+                  Please provide a valid email address.
+                </div>
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-zinc-900 dark:text-white mb-2">
-                  Message
+                <label htmlFor="message" className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 mb-2 uppercase tracking-wide">
+                  Your Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows={5}
                   required
-                  className="w-full px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Your message..."
+                  className="w-full px-4 py-3.5 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:focus:ring-purple-600 transition resize-none"
+                  placeholder="e.g. I'd love to discuss..."
                 />
+                <div className="empty-feedback invalid-feedback text-red-400 text-sm mt-1">
+                  Please enter your message.
+                </div>
               </div>
               <button
                 type="submit"
-                className="w-full px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+                className="w-full px-8 py-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 focus:from-purple-700 focus:to-purple-800 focus:outline-none transition font-semibold shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]"
               >
                 Send Message
               </button>
-            </form>
-            <div className="mt-8 text-center">
-              <p className="text-zinc-600 dark:text-zinc-300 mb-2">Or email me directly at:</p>
-              <a
-                href="mailto:muthukumarshiva1031@gmail.com"
-                className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
-              >
-                muthukumarshiva1031@gmail.com
-              </a>
+
+              {mainFormStatus && (
+                <div className={`text-center ${mainFormStatus.includes('success') || mainFormStatus.includes('Thank') ? 'text-green-500' : mainFormStatus.includes('wait') ? 'text-gray-500' : 'text-red-500'}`}>
+                  {(mainFormStatus.includes('success') || mainFormStatus.includes('Thank')) ? (
+                    <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                      <div className="flex items-center justify-center mb-2">
+                        <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <p className="font-semibold text-green-700 dark:text-green-400 mb-1">Thank you for reaching out!</p>
+                      <p className="text-sm text-green-600 dark:text-green-500">I'll get back to you as soon as possible.</p>
+                    </div>
+                  ) : (
+                    <p className="text-sm font-medium">{mainFormStatus}</p>
+                  )}
+                </div>
+              )}
+
+              </form>
             </div>
           </div>
         </div>
@@ -452,15 +570,13 @@ export default function Home() {
 
           {/* Copyright */}
           <div className="text-center">
-            <p className="text-zinc-600 dark:text-zinc-300 mb-2">
-              Built with <span className="text-red-500 animate-pulse">❤️</span> using Next.js & Tailwind CSS
-            </p>
             <p className="text-zinc-500 dark:text-zinc-400 text-sm">
               © 2025 Muthukumar. All rights reserved.
             </p>
           </div>
         </div>
       </footer>
+
     </div>
   );
 }
