@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { FaReact, FaJsSquare, FaGitAlt, FaHtml5 } from 'react-icons/fa';
-import { SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
+import { SiNextdotjs, SiTypescript, SiTailwindcss, SiFlutter } from 'react-icons/si';
 import { GiArtificialIntelligence } from 'react-icons/gi';
 import { IoPhonePortraitOutline, IoHomeOutline, IoPersonOutline, IoMailOutline, IoFolderOutline, IoGridOutline } from 'react-icons/io5';
 import Image from 'next/image';
@@ -125,15 +125,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Background Image with dark overlay */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/home.jpg)' }}
-        />
-        <div className="absolute inset-0 bg-black/70" />
-        {/* Animated background blobs */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000" />
+        {/* Removed background image and overlay */}
 
         <div className="max-w-6xl mx-auto relative z-10 w-full">
           <div className="text-center">
@@ -211,12 +203,14 @@ export default function Home() {
             <div className="order-2 md:order-1 space-y-6">
               <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-300">
                 I'm a <span className="font-semibold text-zinc-900 dark:text-white">B.Tech Mechanical Engineering</span> graduate who found my passion in frontend development and AI.
-                I specialize in building modern mobile and web applications using <span className="font-semibold text-blue-600 dark:text-blue-400">React Native</span> and <span className="font-semibold text-blue-600 dark:text-blue-400">Next.js</span>,
+                As a professional <span className="font-semibold text-blue-600 dark:text-blue-400">Website Developer</span>, <span className="font-semibold text-blue-600 dark:text-blue-400">Mobile App Developer</span>, and <span className="font-semibold text-blue-600 dark:text-blue-400">Desktop Developer</span>,
+                I specialize in building modern applications using <span className="font-semibold text-blue-600 dark:text-blue-400">React Native</span>, <span className="font-semibold text-blue-600 dark:text-blue-400">Flutter</span>, and <span className="font-semibold text-blue-600 dark:text-blue-400">Next.js</span>,
                 creating beautiful user interfaces with a strong focus on AI integrations and user experiences.
               </p>
               <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-300">
                 My superpower is <span className="font-semibold text-purple-600 dark:text-purple-400">AI prompt engineering</span> - I can leverage AI tools to rapidly develop solutions
-                and write efficient code. I believe in learning by doing and staying at the cutting edge of
+                and write efficient code across all technologies including <span className="font-semibold text-purple-600 dark:text-purple-400">backend development with MongoDB and PHP</span>.
+                With AI, I can quickly master and work with any programming language. I believe in learning by doing and staying at the cutting edge of
                 technology to build the future.
               </p>
               <div className="flex flex-wrap gap-4 pt-4">
@@ -306,6 +300,7 @@ export default function Home() {
             {[
               { name: 'React', icon: <FaReact className="text-5xl text-blue-500" />, level: 'Advanced' },
               { name: 'React Native', icon: <FaReact className="text-5xl text-blue-400" />, level: 'Advanced' },
+              { name: 'Flutter', icon: <SiFlutter className="text-5xl text-blue-400" />, level: 'Advanced' },
               { name: 'Next.js', icon: <SiNextdotjs className="text-5xl text-zinc-900 dark:text-white" />, level: 'Advanced' },
               { name: 'JavaScript', icon: <FaJsSquare className="text-5xl text-yellow-500" />, level: 'Expert' },
               { name: 'TypeScript', icon: <SiTypescript className="text-5xl text-blue-600" />, level: 'Advanced' },
@@ -313,7 +308,7 @@ export default function Home() {
               { name: 'HTML & CSS', icon: <FaHtml5 className="text-5xl text-orange-500" />, level: 'Expert' },
               { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-5xl text-cyan-500" />, level: 'Advanced' },
               { name: 'Git', icon: <FaGitAlt className="text-5xl text-orange-600" />, level: 'Advanced' },
-              { name: 'Mobile Development', icon: <IoPhonePortraitOutline className="text-5xl text-green-500" />, level: 'Advanced' },
+              { name: 'Flutter Management', icon: <SiFlutter className="text-5xl text-cyan-500" />, level: 'Advanced' },
             ].map((skill) => (
               <div
                 key={skill.name}
@@ -354,18 +349,33 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: 'Sybo.ai - Avatar Speaking App',
-                description: 'AI-powered avatar application with speaking capabilities using LiveKit integration for real-time communication',
-                tags: ['React Native', 'AI', 'LiveKit'],
+                title: 'Sybo - Avatar Speaking App',
+                description: 'End-to-end solo React Native project featuring custom avatar speaking capabilities with LiveKit integration for real-time frontend communication',
+                tags: ['React Native', 'Avatar', 'LiveKit', 'Frontend'],
                 gradient: 'from-purple-500/10 to-pink-500/10',
                 iconColor: 'text-purple-500'
               },
               {
-                title: 'Alley - Photo Album UI',
-                description: 'Beautiful and intuitive photo album application with modern UI/UX design',
-                tags: ['React Native', 'UI/UX', 'Mobile'],
+                title: 'Sybo Website',
+                description: 'End-to-end website built with PHP providing complete information about the Sybo avatar app, showcasing features, documentation, and user resources',
+                tags: ['PHP', 'Website', 'Backend', 'Sybo'],
+                gradient: 'from-indigo-500/10 to-purple-500/10',
+                iconColor: 'text-indigo-500',
+                link: 'https://sybo.ai/index.php'
+              },
+              {
+                title: 'Alley - Photo Album App',
+                description: 'End-to-end photo album mobile application built with Flutter and Bloc state management for seamless performance and scalability',
+                tags: ['Flutter', 'Bloc Management', 'Mobile'],
                 gradient: 'from-blue-500/10 to-cyan-500/10',
                 iconColor: 'text-blue-500'
+              },
+              {
+                title: 'POS System',
+                description: 'Complete Point of Sale system built with Flutter for both mobile and desktop platforms, featuring Bloc state management for optimal performance',
+                tags: ['Flutter', 'Mobile', 'Desktop', 'Bloc Management'],
+                gradient: 'from-green-500/10 to-emerald-500/10',
+                iconColor: 'text-green-500'
               },
               {
                 title: 'Trundle - Tour Mobile App (In Progress)',
@@ -387,12 +397,26 @@ export default function Home() {
                     <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
                       {project.title}
                     </h3>
-                    <div className={`w-3 h-3 rounded-full ${project.iconColor} animate-pulse`} />
                   </div>
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute top-4 right-4 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg hover:bg-blue-700"
+                      aria-label={`Visit ${project.title}`}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                    </a>
+                  )}
                   <p className="text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
