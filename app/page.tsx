@@ -125,7 +125,10 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Removed background image and overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 opacity-95" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(59,130,246,0.18),_transparent_20%),radial-gradient(circle_at_bottom_left,_rgba(168,85,247,0.16),_transparent_25%)]" />
+        <div className="absolute top-16 left-10 w-72 h-72 rounded-full bg-blue-500/10 blur-3xl" />
+        <div className="absolute bottom-16 right-10 w-96 h-96 rounded-full bg-purple-500/10 blur-3xl" />
 
         <div className="max-w-6xl mx-auto relative z-10 w-full">
           <div className="text-center">
