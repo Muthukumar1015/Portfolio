@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { FaReact, FaJsSquare, FaHtml5, FaGithub } from 'react-icons/fa';
-import { SiNextdotjs, SiTailwindcss, SiFlutter, SiRedux } from 'react-icons/si';
+import { SiNextdotjs, SiTailwindcss, SiFlutter, SiRedux, SiClaude } from 'react-icons/si';
 import { GiArtificialIntelligence } from 'react-icons/gi';
 import { IoHomeOutline, IoPersonOutline, IoMailOutline, IoFolderOutline, IoGridOutline } from 'react-icons/io5';
 import Image from 'next/image';
@@ -193,7 +193,7 @@ export default function Home() {
 
               {/* Description */}
               <p className="text-zinc-600 text-base sm:text-lg mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
-                Specializing in <span className="text-blue-600 font-semibold">React Native</span>, <span className="text-blue-600 font-semibold">Next.js</span>, and <span className="text-purple-600 font-semibold">AI integrations</span>. I turn ideas into reality with strong technical skills and modern web technologies.
+                Specializing in <span className="text-blue-600 font-semibold">React Native</span>, <span className="text-blue-600 font-semibold">Flutter</span>, <span className="text-blue-600 font-semibold">Next.js</span>, and <span className="text-purple-600 font-semibold">AI integrations</span>. I turn ideas into reality with strong technical skills and modern web technologies.
               </p>
 
               {/* CTA Buttons */}
@@ -210,7 +210,7 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </a>
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="px-7 py-3.5 border-2 border-zinc-300 text-zinc-800 rounded-xl font-semibold hover:border-purple-400 hover:text-purple-600 hover:bg-purple-50 transition-all duration-200 flex items-center justify-center gap-2 hover:scale-105">
+                <a href="/resume.pdf" download="Muthukumar_S_Frontend_Developer_Resume.pdf" className="px-7 py-3.5 border-2 border-zinc-300 text-zinc-800 rounded-xl font-semibold hover:border-purple-400 hover:text-purple-600 hover:bg-purple-50 transition-all duration-200 flex items-center justify-center gap-2 hover:scale-105">
                   Resume
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -382,54 +382,76 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Marquee rows */}
+        {/* Skill categories */}
         {(() => {
-          const row1Base = [
-            { name: 'React', level: 'Advanced', icon: <FaReact className="text-xl text-blue-500" />, color: 'text-blue-500' },
-            { name: 'React Native', level: 'Advanced', icon: <FaReact className="text-xl text-cyan-500" />, color: 'text-cyan-500' },
-            { name: 'Next.js', level: 'Advanced', icon: <SiNextdotjs className="text-xl text-zinc-900 dark:text-white" />, color: 'text-zinc-700 dark:text-zinc-300' },
-            { name: 'JavaScript', level: 'Expert', icon: <FaJsSquare className="text-xl text-yellow-500" />, color: 'text-yellow-500' },
-            { name: 'GitHub', level: 'Advanced', icon: <FaGithub className="text-xl text-zinc-900 dark:text-white" />, color: 'text-zinc-700 dark:text-zinc-300' },
-            { name: 'HTML & CSS', level: 'Expert', icon: <FaHtml5 className="text-xl text-orange-500" />, color: 'text-orange-500' },
+          const categories = [
+            {
+              title: 'Frontend',
+              accent: 'from-blue-500 to-cyan-500',
+              skills: [
+                { name: 'React', level: 'Advanced', icon: <FaReact className="text-xl text-blue-500" /> },
+                { name: 'Next.js', level: 'Advanced', icon: <SiNextdotjs className="text-xl text-zinc-900 dark:text-white" /> },
+                { name: 'JavaScript', level: 'Expert', icon: <FaJsSquare className="text-xl text-yellow-500" /> },
+                { name: 'HTML & CSS', level: 'Expert', icon: <FaHtml5 className="text-xl text-orange-500" /> },
+                { name: 'Tailwind CSS', level: 'Advanced', icon: <SiTailwindcss className="text-xl text-cyan-500" /> },
+              ],
+            },
+            {
+              title: 'Mobile',
+              accent: 'from-violet-500 to-fuchsia-500',
+              skills: [
+                { name: 'React Native', level: 'Advanced', icon: <FaReact className="text-xl text-cyan-500" /> },
+                { name: 'Flutter', level: 'Advanced', icon: <SiFlutter className="text-xl text-blue-400" /> },
+                { name: 'Flutter Bloc', level: 'Advanced', icon: <SiFlutter className="text-xl text-teal-500" /> },
+              ],
+            },
+            {
+              title: 'Tools & AI',
+              accent: 'from-amber-500 to-orange-500',
+              skills: [
+                { name: 'Redux', level: 'Advanced', icon: <SiRedux className="text-xl text-purple-600" /> },
+                { name: 'GitHub', level: 'Advanced', icon: <FaGithub className="text-xl text-zinc-900 dark:text-white" /> },
+                { name: 'Claude Code', level: 'Expert', icon: <SiClaude className="text-xl text-[#D97757]" /> },
+                { name: 'AI-Assisted Dev', level: 'Expert', icon: <GiArtificialIntelligence className="text-xl text-purple-500" /> },
+              ],
+            },
           ];
-          const row2Base = [
-            { name: 'Flutter', level: 'Advanced', icon: <SiFlutter className="text-xl text-blue-400" />, color: 'text-blue-400' },
-            { name: 'Flutter Bloc', level: 'Advanced', icon: <SiFlutter className="text-xl text-teal-500" />, color: 'text-teal-500' },
-            { name: 'Redux', level: 'Advanced', icon: <SiRedux className="text-xl text-purple-600" />, color: 'text-purple-500' },
-            { name: 'Tailwind CSS', level: 'Advanced', icon: <SiTailwindcss className="text-xl text-cyan-500" />, color: 'text-cyan-500' },
-            { name: 'AI Prompting', level: 'Expert', icon: <GiArtificialIntelligence className="text-xl text-purple-500" />, color: 'text-purple-500' },
-          ];
-          // Double each base so one scroll-unit (~1400–1800px) exceeds any viewport width
-          const row1 = [...row1Base, ...row1Base];
-          const row2 = [...row2Base, ...row2Base];
 
-          const SkillPill = ({ skill }: { skill: typeof row1[0] }) => (
-            <div className="flex items-center gap-2.5 px-4 py-2.5 mx-2 bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700 rounded-xl shadow-sm whitespace-nowrap select-none hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-md transition-all duration-200">
-              <span>{skill.icon}</span>
-              <span className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">{skill.name}</span>
-              <span className={`text-[11px] font-medium ${skill.color} border-l border-zinc-200 dark:border-zinc-600 pl-2.5`}>{skill.level}</span>
-            </div>
-          );
+          const levelStyle = (level: string) =>
+            level === 'Expert'
+              ? 'bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800/60'
+              : 'bg-blue-50 text-blue-600 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800/60';
 
           return (
-            <div className="relative z-10 space-y-4">
-              {/* Gradient fades */}
-              <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-white dark:from-zinc-900 to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-white dark:from-zinc-900 to-transparent z-10 pointer-events-none" />
-
-              {/* Row 1 — scrolls left */}
-              <div className="overflow-hidden marquee-track">
-                <div className="animate-marquee-left">
-                  {[...row1, ...row1].map((s, i) => <SkillPill key={i} skill={s} />)}
+            <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-6 md:grid-cols-3">
+              {categories.map((cat) => (
+                <div
+                  key={cat.title}
+                  className="bg-white dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full flex flex-col"
+                >
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className={`w-8 h-1.5 rounded-full bg-gradient-to-r ${cat.accent}`} />
+                    <h3 className="text-base font-bold text-zinc-900 dark:text-white">{cat.title}</h3>
+                    <span className="ml-auto text-xs font-medium text-zinc-400 dark:text-zinc-500">
+                      {cat.skills.length}
+                    </span>
+                  </div>
+                  <ul className="space-y-2.5 flex-1">
+                    {cat.skills.map((s) => (
+                      <li
+                        key={s.name}
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-transparent hover:border-blue-300 dark:hover:border-blue-600 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-200"
+                      >
+                        <span className="shrink-0">{s.icon}</span>
+                        <span className="text-sm font-semibold text-zinc-800 dark:text-zinc-100 whitespace-nowrap">{s.name}</span>
+                        <span className={`ml-auto shrink-0 text-[11px] font-semibold px-2 py-0.5 rounded-full border ${levelStyle(s.level)}`}>
+                          {s.level}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
-
-              {/* Row 2 — scrolls right */}
-              <div className="overflow-hidden marquee-track">
-                <div className="animate-marquee-right">
-                  {[...row2, ...row2].map((s, i) => <SkillPill key={i} skill={s} />)}
-                </div>
-              </div>
+              ))}
             </div>
           );
         })()}

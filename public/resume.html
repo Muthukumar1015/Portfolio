@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Muthukumar S — Resume</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      color: #1a1a1a;
+      background: #fff;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 48px;
+      line-height: 1.5;
+    }
+
+    /* Header */
+    .header { text-align: center; margin-bottom: 18px; }
+    .header h1 { font-size: 26px; font-weight: 700; letter-spacing: 0.5px; color: #111; }
+    .header .role { font-size: 13px; color: #444; margin-top: 3px; font-weight: 500; }
+    .contact {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #333;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 16px;
+    }
+    .contact a { color: #1a56db; text-decoration: none; }
+
+    /* Divider */
+    hr { border: none; border-top: 1.5px solid #1a56db; margin: 14px 0 12px; }
+
+    /* Section */
+    .section { margin-bottom: 16px; }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #1a56db;
+      border-bottom: 1px solid #dde6ff;
+      padding-bottom: 3px;
+      margin-bottom: 10px;
+    }
+
+    /* Summary */
+    .summary p { color: #333; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; }
+    .skill-row { display: flex; gap: 6px; }
+    .skill-label { font-weight: 700; min-width: 150px; color: #222; }
+    .skill-value { color: #333; }
+
+    /* Experience */
+    .job { margin-bottom: 14px; }
+    .job-header { display: flex; justify-content: space-between; align-items: baseline; }
+    .company { font-weight: 700; font-size: 13.5px; color: #111; }
+    .location { font-size: 12px; color: #555; }
+    .role-line { display: flex; justify-content: space-between; align-items: baseline; margin-top: 1px; }
+    .job-title { font-weight: 600; color: #1a56db; font-style: italic; }
+    .dates { font-size: 12px; color: #555; }
+    .job ul { margin-top: 5px; padding-left: 18px; }
+    .job ul li { margin-bottom: 3px; color: #333; }
+
+    /* Projects */
+    .project { margin-bottom: 12px; }
+    .project-header { display: flex; justify-content: space-between; align-items: baseline; }
+    .project-name { font-weight: 700; color: #111; }
+    .project-tech { font-size: 11.5px; color: #1a56db; font-style: italic; }
+    .project ul { margin-top: 4px; padding-left: 18px; }
+    .project ul li { margin-bottom: 3px; color: #333; }
+
+    /* Education */
+    .edu-header { display: flex; justify-content: space-between; align-items: baseline; }
+    .degree { font-weight: 700; color: #111; }
+    .edu-dates { font-size: 12px; color: #555; }
+    .college { color: #333; margin-top: 2px; }
+
+    @media print {
+      body { padding: 28px 36px; }
+      a { color: #1a56db !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>MUTHUKUMAR S</h1>
+    <div class="role">Frontend Developer | Mobile App Developer</div>
+    <div class="contact">
+      <span>+91 9095106520</span>
+      <span>|</span>
+      <a href="mailto:muthukumarshiva1031@gmail.com">muthukumarshiva1031@gmail.com</a>
+      <span>|</span>
+      <span>Ariyalur, Tamil Nadu</span>
+      <span>|</span>
+      <a href="https://www.linkedin.com/in/muthu-kumar-55b26118b" target="_blank">linkedin.com/in/muthu-kumar-55b26118b</a>
+      <span>|</span>
+      <a href="https://github.com/Muthukumar1015" target="_blank">github.com/Muthukumar1015</a>
+      <span>|</span>
+      <a href="https://muthukumar-s.web.app" target="_blank">muthukumar-s.web.app</a>
+    </div>
+  </div>
+
+  <hr/>
+
+  <!-- PROFESSIONAL SUMMARY -->
+  <div class="section summary">
+    <div class="section-title">Professional Summary</div>
+    <p>
+      Frontend and Mobile Developer with 1+ year of experience building cross-platform applications using
+      React Native, Flutter, and Next.js. Delivered 6+ production-ready applications across Web, Mobile,
+      and Desktop platforms. Proficient in state management (Redux, Flutter Bloc), responsive UI development,
+      REST API integration, and AI tool integrations. Background in QA testing brings strong attention to
+      detail and a user-first approach to every project.
+    </p>
+  </div>
+
+  <!-- TECHNICAL SKILLS -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <span class="skill-label">Mobile Development:</span>
+        <span class="skill-value">React Native, Flutter, Flutter Bloc</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">State Management:</span>
+        <span class="skill-value">Redux, Flutter Bloc</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Web Development:</span>
+        <span class="skill-value">Next.js, JavaScript, HTML, CSS</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Styling:</span>
+        <span class="skill-value">Tailwind CSS, Responsive Design</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Tools &amp; Version Control:</span>
+        <span class="skill-value">GitHub, Git, REST API</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Testing:</span>
+        <span class="skill-value">Manual QA Testing, UI Testing</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Platforms:</span>
+        <span class="skill-value">Web, Android, iOS, Desktop (Windows)</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Other:</span>
+        <span class="skill-value">AI Prompting, AI Tool Integration</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORK EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Work Experience</div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="company">NiranSoft Technology Pvt. Ltd</span>
+        <span class="location">Ariyalur, Tamil Nadu</span>
+      </div>
+      <div class="role-line">
+        <span class="job-title">Frontend Developer</span>
+        <span class="dates">March 2025 – Present</span>
+      </div>
+      <ul>
+        <li>Developed and maintained cross-platform mobile applications using React Native and Flutter for Android, iOS, and Desktop platforms.</li>
+        <li>Built responsive and production-ready web applications using Next.js, JavaScript, and Tailwind CSS.</li>
+        <li>Implemented scalable state management solutions using Redux and Flutter Bloc across multiple projects.</li>
+        <li>Integrated REST APIs and third-party SDKs (including LiveKit) into mobile and web applications.</li>
+        <li>Delivered 6+ client-facing applications from concept to production deployment.</li>
+        <li>Utilized AI tools to streamline development workflows and accelerate feature delivery.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="role-line">
+        <span class="job-title">QA Tester</span>
+        <span class="dates">September 2024 – February 2025</span>
+      </div>
+      <ul>
+        <li>Performed manual testing for mobile and web applications, identifying and documenting defects.</li>
+        <li>Collaborated with developers to reproduce bugs and verify fixes across multiple platforms.</li>
+        <li>Built strong understanding of user workflows and application quality standards.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section">
+    <div class="section-title">Projects</div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">Sybo Avatar App</span>
+        <span class="project-tech">React Native, LiveKit</span>
+      </div>
+      <ul>
+        <li>Built a real-time video communication app with avatar features using React Native and LiveKit SDK.</li>
+        <li>Implemented live streaming, real-time chat, and interactive UI components for production use.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">Sybo Website</span>
+        <span class="project-tech">PHP, Web Development</span>
+      </div>
+      <ul>
+        <li>Developed the official product website for Sybo (sybo.ai) with responsive layout and modern design.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">Alley Photo Album</span>
+        <span class="project-tech">Flutter, Flutter Bloc</span>
+      </div>
+      <ul>
+        <li>Built a cross-platform photo album application with advanced state management using Flutter Bloc.</li>
+        <li>Implemented optimized image loading, album management, and smooth UI transitions.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">NiranPOS — Point of Sale System</span>
+        <span class="project-tech">Flutter, Desktop</span>
+      </div>
+      <ul>
+        <li>Developed a desktop-based POS system using Flutter with inventory management and billing features.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">NiranPOS Website</span>
+        <span class="project-tech">Next.js, Tailwind CSS — niransoft.com/NiranPOS</span>
+      </div>
+      <ul>
+        <li>Built the official product website for NiranPOS with fully responsive design and product showcasing.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">Trundle Tour App</span>
+        <span class="project-tech">React Native</span>
+      </div>
+      <ul>
+        <li>Developed a tour discovery mobile app with location-based features, modern UI, and smooth navigation.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+    <div class="edu-header">
+      <span class="degree">B.Tech — Mechanical Engineering</span>
+      <span class="edu-dates">2021 – 2024</span>
+    </div>
+    <div class="college">Periyar Maniammai Institute of Science &amp; Technology, Tamil Nadu</div>
+  </div>
+
+</body>
+</html>
