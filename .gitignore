@@ -42,3 +42,6 @@ next-env.d.ts
 
 # firebase local and deployment cache
 .firebase
+
+# duplicate of public/resume.pdf
+/Muthukumar_S_Frontend_Developer_Resume.pdf

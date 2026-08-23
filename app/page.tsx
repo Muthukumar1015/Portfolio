@@ -301,6 +301,11 @@ export default function Home() {
                   <span className="font-semibold text-purple-600 dark:text-purple-400">AI integrations</span>.
                   My background in <span className="font-semibold text-blue-600 dark:text-blue-400">QA testing</span> gives me a strong eye for detail — I build features with reliability and user experience in mind.
                 </p>
+                <p className="text-base leading-relaxed text-zinc-600 dark:text-zinc-300">
+                  I work with an <span className="font-semibold text-purple-600 dark:text-purple-400">AI-assisted workflow</span> — tools like{' '}
+                  <span className="font-semibold text-purple-600 dark:text-purple-400">Claude Code</span> are part of my daily toolchain, which lets me ship features significantly faster.
+                  I drive the architecture and review every line that goes to production, so speed never comes at the cost of code quality.
+                </p>
               </div>
 
               {/* Social buttons */}
